@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>my-messages</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngFor=" let message of messages"> 
+    <ion-item>
+      <ion-icon name="chatbox-ellipses" slot="start"></ion-icon>
+      <ion-label>{{message.sendDate.substring(0,10)}}</ion-label>
+      <ion-button fill="outline" slot="end">Editer</ion-button>
+      
+    </ion-item>  
+    <ion-card-content>
+      {{message.message}}
+    </ion-card-content>
+    <ion-item>
+      {{message.username}} - Salon {{message.idChannel}}
+      <ion-icon (click)="deleteMessage(message.id)" name="trash-outline" slot="end"></ion-icon>
+    </ion-item>
+  </ion-card>
+</ion-content>
+  
