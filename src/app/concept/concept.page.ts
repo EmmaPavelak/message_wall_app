@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+
 @Component({
   selector: 'app-concept',
   templateUrl: './concept.page.html',
@@ -10,6 +11,7 @@ export class ConceptPage implements OnInit {
   constructor() { }
 
   ngOnInit() {
-  }
 
+  }
+  
 }

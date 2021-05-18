@@ -73,8 +73,7 @@ export class MessageService {
   }
   updateMessage(id: number,data: IMessage[]){
     return new Promise((resolve, reject) => {this.http.put(`${this.url}/${id}`,data).subscribe( 
-      (res: any)=> {
-        location.reload();
+      (res: any)=> {       
         resolve(res);
       },
       (error: any) => {

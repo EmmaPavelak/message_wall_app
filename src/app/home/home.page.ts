@@ -13,25 +13,7 @@ export class HomePage implements AfterViewInit{
 
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
 
-data = [{
-  "id":0,
-  "idChannel":0,
-  "username": "Aline Grover",
-  "message":"coucou",
-  "sendDate": "November 28, 2012"
-}, {
-  "id":0,
-  "idChannel":0,
-  "username": "Aline Grover",
-  "message":"coucou",
-  "sendDate": "January 18, 2014"
-}, {
-  "id":0,
-  "idChannel":0,
-  "username": "Aline Grover",
-  "message":"coucou",
-  "sendDate": "January 18, 2014"
-}];
+
 
 length = 0;
 list :any;
@@ -39,11 +21,7 @@ messages:any;
 
   constructor(private messageService: MessageService) { 
     this.messageService.getMessageByChannel(0).then((value:IMessage[]) => {
-    /*  this.messages=value;
-      value.forEach(element => {
-        this.data.push(element);
-      });    
-      console.log(value.length);*/
+      this.messages=value;
 
       for (var i = 0; i < value.length; i++) {
         const el = document.createElement('ion-item');
@@ -67,8 +45,7 @@ messages:any;
   }
 
   ngAfterViewInit(): void {
-    this.list= document.getElementById('list');
-    console.log(this.data.length);
+    this.list= document.getElementById('list'); 
    // this.appendItems(this.data.length-1);
   }
 
@@ -78,7 +55,7 @@ messages:any;
       event.target.complete();
 
       // App logic to determine if all data is loaded
-      if (length < this.data.length) {
+      if (length < this.messages.length) {
         console.log('Loading data...');
         await this.wait(500);
         this.infiniteScroll.complete();
@@ -89,7 +66,7 @@ messages:any;
         this.infiniteScroll.disabled = true;
       }
       // and disable the infinite scroll
-      if (this.data.length == 1000) {
+      if (this.messages.length == 1000) {
         event.target.disabled = true;
       }
     }, 500);

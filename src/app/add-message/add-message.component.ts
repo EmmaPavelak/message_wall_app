@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from '../messages/message.service';
 import { ActivatedRoute } from '@angular/router';
 import { UsersService } from '../users/users.service';
+import { ChannelsService } from '../channels/channels.service';
 
 @Component({
   selector: 'app-add-message',
@@ -20,6 +21,7 @@ export class AddMessageComponent implements OnInit {
   token=localStorage.getItem('token');
   tokenDecode:any; 
   user:any;
+  channel:any;
   idUser=0;
   idChannel= this.route.snapshot.params['id'];
 
@@ -28,8 +30,11 @@ export class AddMessageComponent implements OnInit {
 
   }
 
-  constructor(private messageService: MessageService, private route: ActivatedRoute, private formBuilder: FormBuilder, private userService: UsersService) { 
+  constructor(private messageService: MessageService, private route: ActivatedRoute, private formBuilder: FormBuilder, private channelService: ChannelsService, private userService: UsersService) { 
     
+    if(this.route.snapshot.params['id']==undefined){
+      this.idChannel=0;
+    }
     if(this.token != null){
       this.tokenDecode = jwt_decode(this.token);
       this.idUser = this.tokenDecode.id;
@@ -37,6 +42,10 @@ export class AddMessageComponent implements OnInit {
       this.userService.getUserByID(this.tokenDecode.id).then((value) => {
         this.user = value; 
         });
+      this.channelService.getChannelById(this.idChannel).then((value) => {
+        this.channel=value;
+        console.log(value);
+      });
     }  
     
     if(this.route.snapshot.params['id'] == null){
@@ -75,7 +84,9 @@ export class AddMessageComponent implements OnInit {
     });
 
     this.user.nbmess++;
+    this.channel.nbMessages++;
     this.userService.updateUser(this.tokenDecode.id,this.user);
+    this.channelService.updateChannel(this.channel.id,this.channel);
   }
  
 

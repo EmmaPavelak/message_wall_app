@@ -1,5 +1,7 @@
 {
   "name": "message-wall-app",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

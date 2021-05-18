@@ -21,26 +21,36 @@
           <ion-icon name="heart" slot="start"></ion-icon>
           <ion-label><a routerLink='/concept'>Le concept</a></ion-label>
         </ion-item>        
-        <ion-item>
+        <ion-item  *ngIf="token != null">
           <ion-icon name="mail" slot="start"></ion-icon>
           <ion-label><a routerLink='/my-messages'>Mes messages</a></ion-label>
         </ion-item>
-        <ion-item>
+        <ion-item *ngIf="token != null"> 
           <ion-icon name="list" slot="start"></ion-icon>
           <ion-label><a routerLink='/my-channel'>Mes salons</a></ion-label>
         </ion-item>
-        <ion-item>
+        <ion-item *ngIf="token != null">
           <ion-icon name="person" slot="start"></ion-icon>
           <ion-label><a routerLink='/my-account'>Mes informations</a></ion-label>
         </ion-item>
         <ion-item>
           <ion-icon name="paper-plane" slot="start"></ion-icon>
           <ion-label><a routerLink='/contact'>Contact</a></ion-label>
-        </ion-item>     
-        <ion-item>
+        </ion-item>   
+        <div *ngIf="token != null then co else notco">Le contenu saisi ici sera ignoré.</div>  
+        <ng-template #co> 
+          <ion-item >
+            <ion-icon name="toggle" slot="start"></ion-icon>
+            <ion-label><a (click)="logout()">Deconnexion</a></ion-label>
+          </ion-item>
+        </ng-template>
+       <ng-template #notco>
+        <ion-item >
           <ion-icon name="toggle" slot="start"></ion-icon>
-          <ion-label><a routerLink='/login'>Deconnexion</a></ion-label>
+          <ion-label><a routerLink='/login'>Se connecter</a></ion-label>
         </ion-item>
+       </ng-template>
+     
       </ion-list>
     </ion-content>
   </ion-menu>

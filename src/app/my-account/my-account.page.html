@@ -7,40 +7,42 @@
 <ion-content>
   <ion-list>
     <ion-list-header>
-    Mes informations
+      <h1>Mes informations</h1>   
     </ion-list-header>
+    <ion-toolbar><ion-title size="small">Cliquer ci-dessous pour editer</ion-title></ion-toolbar>
+
     <ion-item (click)="presentActionSheet()">
       <ion-label>Nom Complet</ion-label>
       <ion-note slot="end" color="primary" >{{user.firstname}} {{user.lastname}}</ion-note>
     </ion-item>
 
-    <ion-item>
+    <ion-item (click)="presentActionSheet()">
       <ion-label>Pseudo</ion-label>
-      <ion-note slot="end" color="secondary">{{user.username}}</ion-note>
+      <ion-note slot="end" color="primary">{{user.username}}</ion-note>
     </ion-item>
 
-    <ion-item>
+    <ion-item (click)="presentActionSheet()">
       <ion-label>Mail</ion-label>
-      <ion-note slot="end" color="tertiary">{{user.email}}</ion-note>
+      <ion-note slot="end" color="primary">{{user.email}}</ion-note>
     </ion-item>
 
-    <ion-item>
+    <ion-item (click)="presentActionSheet()">
       <ion-label>Numéro de téléphone</ion-label>
-      <ion-note slot="end" color="success">{{user.tel}}</ion-note>
+      <ion-note slot="end" color="primary">{{user.tel}}</ion-note>
     </ion-item>
 
-    <ion-item>
+    <ion-item (click)="presentActionSheet()">
       <ion-label>Date de Naissance</ion-label>
-      <ion-note slot="end" color="warning">{{user.birthDate.toString().substr(0, 10)}}</ion-note>
+      <ion-note slot="end" color="primary">{{user.birthDate.toString().substr(0, 10)}}</ion-note>
     </ion-item>
 
-    <ion-item>
+    <ion-item (click)="presentActionSheet()">
       <ion-label>Adresse</ion-label>
-      <ion-note slot="end" color="danger">{{user.address}}</ion-note>
+      <ion-note slot="end" color="primary">{{user.address}}</ion-note>
     </ion-item>
-    <ion-item>
+    <ion-item (click)="presentActionSheet()">
       <ion-label>Nombre de messages envoyés</ion-label>
-      <ion-note slot="end" color="danger">{{nbmess}}</ion-note>
+      <ion-note slot="end" color="primary">{{nbmess}}</ion-note>
     </ion-item>
   </ion-list>
 </ion-content>

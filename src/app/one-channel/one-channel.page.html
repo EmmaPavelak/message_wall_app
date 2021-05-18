@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>one-channel</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-add-message></app-add-message>
+  <ion-toolbar>
+    <ion-title>{{channel.channelName}}</ion-title>
+    <ion-title size="small">{{channel.nbMessages}} messages - {{channel.usersId.split(',').length}} participants</ion-title>
+  </ion-toolbar>
+ 
+
+  <ion-list id="list"></ion-list>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

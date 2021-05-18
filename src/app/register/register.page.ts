@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 import { UsersService } from '../users/users.service';
 import { MustMatch } from '../_helpers/must-match';
+import {LocalNotifications} from '@ionic-native/local-notifications/ngx'
 
 @Component({
   selector: 'app-register',
@@ -21,7 +23,7 @@ export class RegisterPage implements OnInit {
   }
 
 
-  constructor(private formBuilder: FormBuilder, private router: Router,private userService: UsersService) {
+  constructor(private localNotifications:LocalNotifications, private formBuilder: FormBuilder, private router: Router,private userService: UsersService,public toastController: ToastController) {
     this.registrationForm = this.formBuilder.group({
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
@@ -41,11 +43,21 @@ export class RegisterPage implements OnInit {
 
 get f() { return this.registrationForm.controls; }
 
+async presentToast() {
+  const toast = await this.toastController.create({
+    message: 'Votre inscription a bien été prise en compte',
+    duration: 3000
+  });
+  toast.present();
+}
+
 saveUser(){
   this.userService.createUser(this.registrationForm.value).subscribe(
     res => {
       console.log(res);
-      this.router.navigate(['home']); //registration-confirm
+      this.presentToast();
+      this.router.navigate(['home']); 
+      this.registerNotification(2);
     },
     err => {
       this.registerOK = false;
@@ -55,6 +67,13 @@ saveUser(){
 
 }
 
+registerNotification(ms:number){
+  this.localNotifications.schedule({
+    title:"Confirmation d'inscription",
+    text:"Felicitations, vous avez créer un compte sur Message Wall !"
+    //trigger:
+  });
+}
 
 
   onSubmit(): void {

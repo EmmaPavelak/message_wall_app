@@ -1,0 +1,65 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title>Modal Content</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content fullscreen>
+  <form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+    <ion-grid>
+      <ion-row color="primary" justify-content-center>
+        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+          <div text-center>
+            <h3>Modifier mes informations</h3>
+          </div>
+          <div padding>
+            <ion-item>
+              <ion-input name="id" type="hidden" placeholder="your@email.com" formControlName="id" [(ngModel)]="user.id" required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label color="primary">Prénom: </ion-label>
+              <ion-input  name="firstname" type="text" placeholder="Prénom"  formControlName="firstname" [(ngModel)]="user.firstname" required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label color="primary">Nom: </ion-label>
+              <ion-input  name="lastname" type="text" placeholder="Nom" formControlName="lastname" [(ngModel)]="user.lastname" required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label color="primary">Pseudo: </ion-label>
+              <ion-input  name="username" type="text" placeholder="Pseudo" formControlName="username" [(ngModel)]="user.username"  required></ion-input>
+            </ion-item>           
+            <ion-item>
+              <ion-label color="primary">Mail: </ion-label>
+              <ion-input name="email" type="email" placeholder="your@email.com" formControlName="email" [(ngModel)]="user.email" required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label color="primary">Téléphone: </ion-label>
+              <ion-input name="tel" type="number" placeholder="0692000000"  formControlName="tel" [(ngModel)]="user.tel" required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label color="primary">Adresse: </ion-label>
+              <ion-input name="address" type="text" placeholder="Adresse" formControlName="address"  [(ngModel)]="user.address" required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label color="primary">Date de naissance: </ion-label>
+              <ion-input name="birthDate" type="date" placeholder="Date de naissance"  formControlName="birthDate" [(ngModel)]="user.birthDate"  required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label color="primary">Mot de passe: </ion-label>
+              <ion-input name="password" type="password" placeholder="Mot de passe"  formControlName="password" required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label color="primary">Confirmation du mot de passse: </ion-label>
+              <ion-input name="confirm" type="password" placeholder="Mot de passe"  formControlName="confirmPassword" required></ion-input>
+            </ion-item>
+          </div>
+          <div padding>
+            <ion-button  size="large" type="submit"  [disabled]="updateForm.invalid" expand="block">Mettre à jour</ion-button>
+          </div>
+        </ion-col>
+      </ion-row>    
+    </ion-grid>
+  </form>
+</ion-content>

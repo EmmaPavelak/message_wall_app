@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MenuController } from '@ionic/angular';
+import { UsersService } from './users/users.service';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +8,8 @@ import { MenuController } from '@ionic/angular';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor(private menu: MenuController) { }
+  token= localStorage.getItem('token');
+  constructor(private menu: MenuController,private userService: UsersService) { }
 
   openFirst() {
     this.menu.enable(true, 'first');
@@ -21,5 +23,8 @@ export class AppComponent {
   openCustom() {
     this.menu.enable(true, 'custom');
     this.menu.open('custom');
+  }
+  logout(){
+    this.userService.logout();    
   }
 }

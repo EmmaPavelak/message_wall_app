@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IUser } from './users.models';
+import { Router } from '@angular/router';
 
 
 
@@ -10,7 +11,7 @@ import { IUser } from './users.models';
 })
 export class UsersService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
   url = 'http://localhost:3000';
 
   getUserByID(id: number) {
@@ -42,7 +43,7 @@ export class UsersService {
       res => {
         const token= Object.values(res)[0].toString();
         localStorage.setItem('token', token);  
-  
+        
         resolve(token);
       },
       (error) => {
@@ -72,6 +73,7 @@ export class UsersService {
   }
   logout() {
     localStorage.removeItem('token');    
+    this.router.navigate(['login']);
     location.reload();
   }
 }

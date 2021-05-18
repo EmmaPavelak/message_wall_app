@@ -39,6 +39,18 @@ const routes: Routes = [
     path: 'my-messages',
     loadChildren: () => import('./my-messages/my-messages.module').then( m => m.MyMessagesPageModule)
   },
+  {
+    path: 'one-channel/:id',
+    loadChildren: () => import('./one-channel/one-channel.module').then( m => m.OneChannelPageModule)
+  },
+  {
+    path: 'modal',
+    loadChildren: () => import('./modal/modal.module').then( m => m.ModalPageModule)
+  },
+  {
+    path: 'modal-mess',
+    loadChildren: () => import('./modal-mess/modal-mess.module').then( m => m.ModalMessPageModule)
+  },
 ];
 
 @NgModule({

@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import jwt_decode from "jwt-decode";
 import { UsersService } from '../users/users.service';
-import { ActionSheetController } from '@ionic/angular';
+import { ActionSheetController, ModalController } from '@ionic/angular';
+import { ModalPage } from '../modal/modal.page';
 
 @Component({
   selector: 'app-my-account',
@@ -16,13 +17,10 @@ export class MyAccountPage implements OnInit {
   user:any;
   tokenDecode:any;
   token= localStorage.getItem('token');
-  updateForm: FormGroup;  
-  submitted = false;
-  registerOK = true;
   id:number=0;
 
 
-  constructor(private formBuilder: FormBuilder,private userService: UsersService, public actionSheetController: ActionSheetController) { 
+  constructor(private formBuilder: FormBuilder,private userService: UsersService, public actionSheetController: ActionSheetController, public modalController: ModalController) { 
     this.user={
       id: 0,
       address: "",
@@ -32,22 +30,11 @@ export class MyAccountPage implements OnInit {
       lastname: "",
       password: "",
       tel: 0,
-      username: ""}
-      
-    this.updateForm = this.formBuilder.group({
-      id: ['', Validators.required],
-      firstname: ['', Validators.required],
-      lastname: ['', Validators.required],
-      username: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      email: ['', [Validators.required, Validators.email]], 
-      tel: [''], 
-      address: ['',Validators.required], 
-      birthDate: ['', Validators.required]
-    });
+      username: ""}      
+
   }
 
-  get f() { return this.updateForm.controls; }
+
 
   ngOnInit(): void {
     if(this.token != null){
@@ -59,43 +46,32 @@ export class MyAccountPage implements OnInit {
     }
   }
 
-updateUser(){
-  this.userService.updateUser(this.tokenDecode.id,this.updateForm.value).then((value) => {
-    console.log(value);
-    location.reload();
-  });
-}
-onSubmit(): void {
-  this.submitted = true;
-  console.log(this.updateForm.value);
-  
-   // stop here if form is invalid
-   if (this.updateForm.invalid) {
-    return;
-}
-    this.updateUser();
-    this.submitted = true;
 
-}
  
-
+async presentModal() {
+  const modal = await this.modalController.create({
+    component: ModalPage,
+    cssClass: 'my-custom-class'
+  });
+  return await modal.present();
+}
 
 async presentActionSheet() {
   const actionSheet = await this.actionSheetController.create({
     header: 'Albums',
     cssClass: 'my-custom-class',
-    buttons: [{
+    buttons: [/*{
       text: 'Supprimer',
       role: 'destructive',
       icon: 'trash',
       handler: () => {
         console.log('Delete clicked');
       }
-    }, {
-      text: 'Editer (open modal)',
-      icon: 'caret-forward-circle',
+    },*/ {
+      text: 'Editer',
+      icon: 'pencil',
       handler: () => {
-        console.log('Play clicked');
+        this.presentModal() ;
       }
     }, {
       text: 'Cancel',
