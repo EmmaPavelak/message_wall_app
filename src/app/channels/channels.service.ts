@@ -6,17 +6,17 @@ import { IChannel } from './channels.model';
   providedIn: 'root'
 })
 export class ChannelsService {
- 
-  
-  url = 'http://localhost:3000/api/channels';
+
+
+  url = 'https://back.message.btcv.fr/api/channels';
   channels:any;
 
   constructor(private http: HttpClient) { }
-  
+
   getAllChannels(){
-    return new Promise((resolve, reject) => {this.http.get<Object>(`${this.url}`).subscribe( 
+    return new Promise((resolve, reject) => {this.http.get<Object>(`${this.url}`).subscribe(
       res => {
-        this.channels=res;   
+        this.channels=res;
         console.log(res);
         resolve(this.channels);
       },
@@ -24,10 +24,10 @@ export class ChannelsService {
         reject(error);
       }
       );
-    }); 
+    });
   }
   getChannelByUser(userId: number){
-    return new Promise((resolve, reject) => {this.http.get<Object>(`${this.url}/username/${userId}`).subscribe( 
+    return new Promise((resolve, reject) => {this.http.get<Object>(`${this.url}/username/${userId}`).subscribe(
       res => {
         resolve(res);
       },
@@ -35,10 +35,10 @@ export class ChannelsService {
         reject(error);
       }
       );
-    }); 
+    });
   }
   getChannelById(id: number){
-    return new Promise((resolve, reject) => {this.http.get<Object>(`${this.url}/${id}`).subscribe( 
+    return new Promise((resolve, reject) => {this.http.get<Object>(`${this.url}/${id}`).subscribe(
       res => {
         resolve(res);
       },
@@ -46,10 +46,10 @@ export class ChannelsService {
         reject(error);
       }
       );
-    }); 
+    });
   }
   addChannel(data: IChannel[]){
-    return new Promise((resolve, reject) => {this.http.post(`${this.url}`,data).subscribe( 
+    return new Promise((resolve, reject) => {this.http.post(`${this.url}`,data).subscribe(
       (res: any)=> {
         resolve(res);
       },
@@ -57,10 +57,10 @@ export class ChannelsService {
         reject(error);
       }
       );
-    }); 
+    });
   }
   updateChannel(id: number,data: IChannel[]){
-    return new Promise((resolve, reject) => {this.http.put(`${this.url}/${id}`,data).subscribe( 
+    return new Promise((resolve, reject) => {this.http.put(`${this.url}/${id}`,data).subscribe(
       (res: any)=> {
         location.reload();
         resolve(res);
@@ -69,10 +69,10 @@ export class ChannelsService {
         reject(error);
       }
       );
-    }); 
+    });
   }
   deleteChannel(id: number){
-    return new Promise((resolve, reject) => {this.http.delete(`${this.url}/${id}`).subscribe( 
+    return new Promise((resolve, reject) => {this.http.delete(`${this.url}/${id}`).subscribe(
       (res: any)=> {
         location.reload();
         resolve(res);
@@ -81,6 +81,6 @@ export class ChannelsService {
         reject(error);
       }
       );
-    }); 
+    });
   }
 }

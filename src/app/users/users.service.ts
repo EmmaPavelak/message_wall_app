@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class UsersService {
 
   constructor(private http: HttpClient, private router: Router) { }
-  url = 'http://localhost:3000';
+  url = 'https://back.message.btcv.fr';
 
   getUserByID(id: number) {
     //return this.http.get<Object>(`${this.url}/api/auth/users/${id}`);
