@@ -19,6 +19,7 @@
     "@angular/platform-browser": "~11.2.0",
     "@angular/platform-browser-dynamic": "~11.2.0",
     "@angular/router": "~11.2.0",
+    "@ionic-native/core": "^5.33.0",
     "@ionic-native/http": "^5.33.0",
     "@ionic-native/local-notifications": "^5.33.0",
     "@ionic/angular": "^5.5.2",
@@ -46,7 +47,7 @@
     "@types/node": "^12.11.1",
     "@typescript-eslint/eslint-plugin": "4.16.1",
     "@typescript-eslint/parser": "4.16.1",
-    "cordova-android": "^9.1.0",
+    "cordova-android": "9.1.0",
     "cordova-plugin-advanced-http": "^3.1.0",
     "cordova-plugin-badge": "^0.8.8",
     "cordova-plugin-device": "^2.0.3",
@@ -74,7 +75,8 @@
     "phonegap-plugin-push": "^2.3.0",
     "protractor": "~7.0.0",
     "ts-node": "~8.3.0",
-    "typescript": "~4.0.2"
+    "typescript": "~4.0.2",
+    "wonderpush-cordova-sdk": "^3.0.6"
   },
   "description": "An Ionic project",
   "cordova": {
@@ -86,9 +88,14 @@
       "cordova-plugin-statusbar": {},
       "cordova-plugin-device": {},
       "cordova-plugin-splashscreen": {},
-      "cordova-plugin-ionic-webview": {},
+      "cordova-plugin-ionic-webview": {
+        "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
+      },
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-advanced-http": {}
-    }
+    },
+    "platforms": [
+      "android"
+    ]
   }
 }
